@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love!</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            /* background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%); */
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #FFEFE9;
+            padding-left: 100px;
+        }
+
+        #drawing_canvas {
+            position: absolute;
+            margin: auto;
+            width: 512px;
+            height: 350px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: float 4s infinite ease-in-out;
+        }
+
+        h1 {
+            color: #e74c3c;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #333;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .heart {
+            color: #e74c3c;
+        }
+
+        .conf0 {
+            fill: #FC6394;
+        }
+
+        .conf1 {
+            fill: #EF3C8A;
+        }
+
+        .conf2 {
+            fill: #5ADAEA;
+        }
+
+        .conf3 {
+            fill: #974CBE;
+        }
+
+        .conf4 {
+            fill: #3CBECD;
+        }
+
+        .conf5 {
+            fill: #813BBE;
+        }
+
+        .conf6 {
+            fill: #F9B732;
+        }
+
+        .conf7 {
+            display: none;
+            fill: none;
+            stroke: #000000;
+            stroke-miterlimit: 10;
+        }
+
+        .conf8 {
+            fill: none;
+            stroke: #F9B732;
+            stroke-width: 9;
+            stroke-linecap: round;
+            stroke-miterlimit: 10;
+        }
+
+
+        .confetti-cone {
+            transform-origin: 200px 50px;
+            animation: confetti-cone1 1.2s ease infinite;
+        }
+
+        @keyframes confetti-cone1 {
+            0% {
+                transform: translate(40px, 95px) rotate(45deg) scale(1, 1);
+            }
+
+            15% {
+                transform: translate(10px, 145px) rotate(45deg) scale(1.1, 0.85);
+
+            }
+
+            100% {
+                transform: translate(40px, 105px) rotate(45deg) scale(1, 1);
+            }
+        }
+
+        #yellow-strip {
+            fill: none;
+            stroke: #F9B732;
+            stroke-width: 9;
+            stroke-linecap: round;
+            stroke-miterlimit: 10;
+            animation: confdash 1.2s ease infinite;
+        }
+
+
+        @keyframes confdash {
+            0% {
+                stroke-dasharray: 1000;
+                stroke-dashoffset: 500;
+                transform: translate(-30px, 30px);
+                opacity: 0;
+            }
+
+            2% {
+                stroke-dasharray: 1000;
+                stroke-dashoffset: 500;
+                transform: translate(-30px, 30px);
+                opacity: 0;
+            }
+
+            35% {
+                stroke-dasharray: 1000;
+                stroke-dashoffset: 900;
+                transform: translate(-2px, 0px);
+                opacity: 1;
+            }
+
+            85% {
+                stroke-dasharray: 1000;
+                stroke-dashoffset: 1000;
+                transform: translate(1px, -5px);
+                opacity: 1;
+            }
+
+            90% {
+                stroke-dashoffset: 1000;
+                stroke-dashoffset: 1000;
+                transform: translate(2px, -8px);
+                opacity: 0;
+            }
+
+            100% {
+                stroke-dashoffset: 1000;
+                stroke-dashoffset: 500;
+                transform: translate(2px, -8px);
+                opacity: 0;
+            }
+        }
+
+
+
+        #a2 {
+            transform-origin: 310.9px 241px;
+            animation: confa 1.2s ease-out infinite;
+        }
+
+        #a1 {
+            transform-origin: 276px 246px;
+            animation: confa 1.2s ease-out infinite;
+        }
+
+        @keyframes confa {
+            0% {
+                opacity: 0;
+                transform: translate(-30px, 20px) rotate(0);
+            }
+
+            15% {
+                opacity: 1;
+                transform: translate(25px, -10px) rotate(60deg);
+            }
+
+            80% {
+                opacity: 1;
+                transform: translate(33px, -18px) rotate(180deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(37px, -23px) scale(0.5)rotate(230deg);
+            }
+        }
+
+
+        #b1 {
+            transform-origin: 195.2px 232.6px;
+            animation: confb 1.2s ease-out infinite;
+        }
+
+        #b2 {
+            transform-origin: 230.8px 219.8px;
+            animation: confb 1.2s ease-out infinite;
+        }
+
+        #b3 {
+            transform-origin: 222.8px 190.6px;
+            animation: confb 1.2s ease-out infinite;
+        }
+
+        #b4 {
+            transform-origin: 262px 188.5px;
+            animation: confb 1.2s ease-out infinite;
+        }
+
+        #b5 {
+            transform-origin: 282.3px 170.6px;
+            animation: confb 1.2s ease-out infinite;
+        }
+
+
+        @keyframes confb {
+            0% {
+                opacity: 0;
+                transform: translate(-30px, 20px) rotate(0);
+            }
+
+            12% {
+                opacity: 1;
+                transform: translate(25px, -10px) rotate(60deg);
+            }
+
+            76% {
+                opacity: 1;
+                transform: translate(33px, -18px) rotate(180deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(37px, -23px) scale(0.5) rotate(240deg);
+            }
+        }
+
+        #c1 {
+            transform-origin: 174.8px 183.4px;
+            animation: confc 1.2s ease-out infinite;
+        }
+
+        #c2 {
+            transform-origin: 178.9px 156.2px;
+            animation: confc 1.2s ease-out infinite;
+        }
+
+        #c3 {
+            transform-origin: 206.7px 140px;
+            animation: confc 1.2s ease-out infinite;
+        }
+
+        #c4 {
+            transform-origin: 213.5px 120.2px;
+            animation: confc 1.2s ease-out infinite;
+        }
+
+        @keyframes confc {
+            0% {
+                opacity: 0.7;
+                transform: translate(-30px, 20px) rotate(0);
+            }
+
+            18% {
+                opacity: 1;
+                transform: translate(5px, -10px) rotate(60deg);
+            }
+
+            76% {
+                opacity: 1;
+                transform: translate(13px, -18px) rotate(180deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(17px, -23px) scale(0.5) rotate(230deg);
+            }
+        }
+
+        #d1 {
+            transform-origin: 127px 176px;
+            animation: confd 1.2s ease-out infinite;
+        }
+
+        #d2 {
+            transform-origin: 133px 118px;
+            animation: confd 1.2s ease-out infinite;
+        }
+
+        #d3 {
+            transform-origin: 152px 100px;
+            animation: confd 1.2s ease-out infinite;
+        }
+
+        @keyframes confd {
+            0% {
+                opacity: 0.7;
+                transform: translate(-20px, 20px) rotate(0);
+            }
+
+            18% {
+                opacity: 1;
+                transform: translate(-5px, -10px) rotate(60deg);
+            }
+
+            76% {
+                opacity: 1;
+                transform: translate(-8px, -18px) rotate(180deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-10px, -23px) scale(0.5) rotate(230deg);
+            }
+        }
+        table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 0px;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .heart {
+      position: absolute;
+      font-size: 30px; /* Adjust font size as needed */
+      color: red; /* Heart color */
+      animation: fall 5s linear infinite; /* Adjust animation duration and timing as needed */
+    }
+
+    .rose {
+      position: absolute;
+      font-size: 30px; /* Adjust font size as needed */
+      color: green; /* Rose color */
+      animation: fall 5s linear infinite; /* Adjust animation duration and timing as needed */
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotateZ(0deg); /* Start position and rotation */
+        opacity: 0; /* Start with no opacity */
+      }
+      100% {
+        transform: translateY(calc(100vh + 100px)) rotateZ(360deg); /* End position and rotation */
+        opacity: 1; /* Fully visible at the end */
+      }
+    }
+  
+    </style>
+</head>
+
+<body>
+    <div>
+        <canvas id="drawing_canvas"></canvas>
+    </div>
+    <table>
+        <tr>
+           
+            <td>
+                <div class="container" id="BithdayGriting" style="display: none;">
+                    <h1><span class="heart">&hearts;</span>Happy Birthday, My Life!<span class="heart">&hearts;</span>
+                    </h1>
+                    <p>On this special day, my special person who makes every day brighter.
+                    </p>
+                    <p> We celebrate your 24th Birthday and the beautiful moments we share. 
+                        Here's to more laughter, more joy, and more love in the coming year. 
+                        You're my star,You're my Best friend and my support system, and I'm so grateful to have you in my life."
+                    </p>
+                    <p>May this day be filled with happiness, unforgettable moments, and lots of surprises!</p>
+                    <b style="font-size: 20px;">🥂🍾🥂 Cheers to you!" 🥂🍾🥂</b>
+                    
+                    <img src="Birthday.JPG" alt="Happy Birthday">
+                </div>
+                <audio  id='myAudio' controls autoplay loop><source src="HappyBirthdaysong.mp3" type="audio/mp3"/></audio>
+
+            </td>
+            <!-- <td>Cell 3.1</td> -->
+        </tr>
+    </table>
+
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // window.onload = function() {
+    //     var audio = document.getElementById("myAudio");
+    //     audio.play();
+    // };
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Function to create a heart element
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤️'; // Heart emoji
+      heart.style.left = getRandomInt(0, window.innerWidth) + 'px'; // Randomize horizontal position
+      heart.style.top = getRandomInt(0, window.innerHeight) + 'px'; // Randomize vertical position
+      document.body.appendChild(heart);
+    }
+
+    // Function to create a rose element
+    function createRose() {
+      const rose = document.createElement('div');
+      rose.classList.add('rose');
+      rose.innerHTML = '🌹'; // Rose emoji
+      rose.style.left = getRandomInt(0, window.innerWidth) + 'px'; // Randomize horizontal position
+      rose.style.top = getRandomInt(0, window.innerHeight) + 'px'; // Randomize vertical position
+      document.body.appendChild(rose);
+    }
+
+    // Generate hearts and roses at intervals until 5 seconds
+    let heartInterval = setInterval(createHeart, 500); // Adjust interval as needed
+    let roseInterval = setInterval(createRose, 1000); // Adjust interval as needed
+    setTimeout(() => {
+      clearInterval(heartInterval); // Stop generating hearts after 5 seconds
+      clearInterval(roseInterval); // Stop generating roses after 5 seconds
+    }, 5000);
+
+    const TWO_PI = Math.PI * 2;
+    const HALF_PI = Math.PI * 0.5;
+
+    // canvas settings
+    var viewWidth = 512,
+        viewHeight = 350,
+        drawingCanvas = document.getElementById("drawing_canvas"),
+        ctx,
+        timeStep = (1 / 60);
+
+    Point = function (x, y) {
+        this.x = x || 0;
+        this.y = y || 0;
+    };
+
+    Particle = function (p0, p1, p2, p3) {
+        this.p0 = p0;
+        this.p1 = p1;
+        this.p2 = p2;
+        this.p3 = p3;
+
+        this.time = 0;
+        this.duration = 3 + Math.random() * 2;
+        this.color = '#' + Math.floor((Math.random() * 0xffffff)).toString(16);
+
+        this.w = 8;
+        this.h = 6;
+
+        this.complete = false;
+    };
+
+    Particle.prototype = {
+        update: function () {
+            this.time = Math.min(this.duration, this.time + timeStep);
+
+            var f = Ease.outCubic(this.time, 0, 1, this.duration);
+            var p = cubeBezier(this.p0, this.p1, this.p2, this.p3, f);
+
+            var dx = p.x - this.x;
+            var dy = p.y - this.y;
+
+            this.r = Math.atan2(dy, dx) + HALF_PI;
+            this.sy = Math.sin(Math.PI * f * 10);
+            this.x = p.x;
+            this.y = p.y;
+
+            this.complete = this.time === this.duration;
+        },
+        draw: function () {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.r);
+            ctx.scale(1, this.sy);
+
+            ctx.fillStyle = this.color;
+            ctx.fillRect(-this.w * 0.5, -this.h * 0.5, this.w, this.h);
+
+            ctx.restore();
+        }
+    };
+
+    Loader = function (x, y) {
+        this.x = x;
+        this.y = y;
+
+        this.r = 30;
+        this._progress = 0;
+
+        this.complete = false;
+    };
+
+    Loader.prototype = {
+        reset: function () {
+            this._progress = 0;
+            this.complete = false;
+        },
+        set progress(p) {
+            this._progress = p < 0 ? 0 : (p > 1 ? 1 : p);
+
+            this.complete = this._progress === 1;
+        },
+        get progress() {
+            return this._progress;
+        },
+        // draw:function() {
+        //     ctx.fillStyle = '#FF5733';
+        //     ctx.beginPath();
+        //     ctx.arc(this.x, this.y, this.r, -HALF_PI, TWO_PI * this._progress - HALF_PI);
+        //     ctx.lineTo(this.x, this.y);
+        //     ctx.closePath();
+        //     ctx.fill();
+        // }
+        //     draw: function() {
+        //     ctx.fillStyle = '#FF5733';
+        //     ctx.beginPath();
+        //     ctx.moveTo(this.x, this.y + this.r);
+        //     ctx.quadraticCurveTo(this.x + this.r, this.y, this.x, this.y - this.r);
+        //     ctx.quadraticCurveTo(this.x - this.r, this.y, this.x, this.y + this.r);
+        //     ctx.closePath();
+        //     ctx.fill();
+        // }
+        draw: function () {
+            const x = viewWidth / 2;
+            const y = viewHeight / 2;
+            const scale = 0.5; // Adjust the scale to resize the heart
+            const size = 200 * scale;
+            ctx.moveTo(x, y - size / 4);
+            ctx.bezierCurveTo(x + size / 2, y - size / 2.5, x + size, y, x, y + size);
+            ctx.bezierCurveTo(x - size, y, x - size / 2, y - size / 2.5, x, y - size / 4);
+            ctx.fillStyle = 'red'; // Change color if desired
+            ctx.fill();
+            ctx.closePath();
+        }
+
+
+    };
+
+    // pun intended
+    Exploader = function (x, y) {
+        this.x = x;
+        this.y = y;
+
+        this.startRadius = 24;
+
+        this.time = 0;
+        this.duration = 0.4;
+        this.progress = 0;
+
+        this.complete = false;
+    };
+
+    Exploader.prototype = {
+        // reset:function() {
+        //    document.getElementById("content").style.display = "block";
+
+        // },
+        update: function () {
+            this.time = Math.min(this.duration, this.time + timeStep);
+            this.progress = Ease.inBack(this.time, 0, 1, this.duration);
+
+            this.complete = this.time === this.duration;
+        },
+        draw: function () {
+            const x = viewWidth / 2;
+            const y = viewHeight / 2;
+            const scale = 0.5; // Adjust the scale to resize the heart
+            const size = 200 * scale;
+            ctx.moveTo(x, y - size / 4);
+            ctx.bezierCurveTo(x + size / 3, y - size / 2.5, x + size, y, x, y + size);
+            ctx.bezierCurveTo(x - size, y, x - size / 3, y - size / 2.5, x, y - size / 4);
+            ctx.fillStyle = 'red'; // Change color if desired
+            ctx.fill();
+            ctx.closePath();
+        }
+    };
+
+    var particles = [],
+        loader,
+        exploader,
+        phase = 0;
+
+    function initDrawingCanvas() {
+        viewWidth = 512,
+            viewHeight = 350,
+            drawingCanvas = document.getElementById("drawing_canvas"),
+            ctx,
+            timeStep = (1 / 60);
+
+        drawingCanvas.width = 512;
+        drawingCanvas.height = 350;
+        ctx = drawingCanvas.getContext('2d');
+
+        createLoader();
+        createExploader();
+        createParticles();
+    }
+
+    function createLoader() {
+        loader = new Loader(viewWidth * 0.5, viewHeight * 0.5);
+    }
+
+    function createExploader() {
+        exploader = new Exploader(viewWidth * 0.5, viewHeight * 0.5);
+    }
+
+    function createParticles() {
+        for (var i = 0; i < 500; i++) {
+            var p0 = new Point(viewWidth * 0.5, viewHeight * 0.5);
+            var p1 = new Point(Math.random() * viewWidth, Math.random() * viewHeight);
+            var p2 = new Point(Math.random() * viewWidth, Math.random() * viewHeight);
+            var p3 = new Point(Math.random() * viewWidth, viewHeight + 64);
+
+            particles.push(new Particle(p0, p1, p2, p3));
+        }
+    }
+
+    function update() {
+
+        switch (phase) {
+            case 0:
+                loader.progress += (1 / 45);
+                break;
+            case 1:
+                exploader.update();
+                break;
+            case 2:
+                particles.forEach(function (p) {
+                    p.update();
+                });
+                break;
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, viewWidth, viewHeight);
+
+        switch (phase) {
+            case 0:
+                loader.draw();
+                break;
+            case 1:
+                exploader.draw();
+                break;
+            case 2:
+                particles.forEach(function (p) {
+                    p.draw();
+                });
+                break;
+        }
+    }
+
+    window.onload = function () {
+        initDrawingCanvas();
+        requestAnimationFrame(loop);
+        // Get the audio element
+var audio = document.getElementById("myAudio");
+
+// Play the audio
+audio.play();
+
+    };
+
+    function loop() {
+        update();
+        draw();
+
+        if (phase === 0 && loader.complete) {
+            phase = 1;
+        }
+        else if (phase === 1 && exploader.complete) {
+            phase = 2;
+        }
+        else if (phase === 2 && checkParticlesComplete()) {
+            // reset
+            document.getElementById("drawing_canvas").style.display = "none";
+            // document.getElementById("svgbirthday").style.display = "block";
+
+            document.getElementById("BithdayGriting").style.display = "block";
+
+            // var audio = document.getElementById("myAudio");
+            // audio.play();
+            phase = 0;
+            loader.reset();
+            exploader.reset();
+            particles.length = 0;
+            createParticles();
+
+        }
+
+        requestAnimationFrame(loop);
+        //document.getElementById("content").style.display = "block";
+
+    }
+
+    function checkParticlesComplete() {
+        for (var i = 0; i < particles.length; i++) {
+            if (particles[i].complete === false) return false;
+        }
+        return true;
+    }
+
+    // math and stuff
+
+    /**
+     * easing equations from http://gizma.com/easing/
+     * t = current time
+     * b = start value
+     * c = delta value
+     * d = duration
+     */
+    var Ease = {
+        inCubic: function (t, b, c, d) {
+            t /= d;
+            return c * t * t * t + b;
+        },
+        outCubic: function (t, b, c, d) {
+            t /= d;
+            t--;
+            return c * (t * t * t + 1) + b;
+        },
+        inOutCubic: function (t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t * t + b;
+            t -= 2;
+            return c / 2 * (t * t * t + 2) + b;
+        },
+        inBack: function (t, b, c, d, s) {
+            s = s || 1.70158;
+            return c * (t /= d) * t * ((s + 1) * t - s) + b;
+        }
+    };
+
+    function cubeBezier(p0, c0, c1, p1, t) {
+        var p = new Point();
+        var nt = (1 - t);
+
+        p.x = nt * nt * nt * p0.x + 3 * nt * nt * t * c0.x + 3 * nt * t * t * c1.x + t * t * t * p1.x;
+        p.y = nt * nt * nt * p0.y + 3 * nt * nt * t * c0.y + 3 * nt * t * t * c1.y + t * t * t * p1.y;
+
+        return p;
+    }
+
+</script>
+
+</html>
